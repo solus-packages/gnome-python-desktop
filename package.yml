@@ -1,0 +1,26 @@
+name       : gnome-python-desktop
+version    : 2.32.0
+release    : 1
+source     :
+    - http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.32/gnome-python-desktop-2.32.0.tar.gz : 45d28ca79e000580a9d4a1a4bb1d971032f93dc7f596b277f335da86031c10f6
+license    :
+    - GPL-2.0
+    - LGPL-2.1
+component  : programming.python
+summary    : Python modules that used to live in gnome-python-extras
+description: |
+    Python modules that used to live in gnome-python-extras
+builddeps  :
+    - pkgconfig(gnome-python-2.0)
+    - pkgconfig(librsvg-2.0)
+    - pkgconfig(pycairo)
+    - pkgconfig(pygobject-2.0)
+    - pkgconfig(pygtk-2.0)
+setup      : |
+    export PYTHON=/usr/bin/python2
+    %configure --disable-allbindings --enable-rsvg
+build      : |
+    %make
+install    : |
+    %make_install
+    install -Dm00644 rsvg/rsvg.defs $installdir/usr/share/pygtk/2.0/defs/rsvg.defs
